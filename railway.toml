@@ -1,6 +1,0 @@
-[build]
-builder = "RAILPACK"
-buildCommand = "cd backend && go build -o app ."
-
-[deploy]
-startCommand = "cd backend && ./app"

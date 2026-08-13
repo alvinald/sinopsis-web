@@ -35,7 +35,7 @@ export function Logo({ variant = 'dark', size = 'md', className }: LogoProps) {
           variant === 'light' ? 'text-white' : 'text-stone-900'
         )}
       >
-        Brew<span className={variant === 'light' ? 'text-amber-300' : 'text-amber-600'}>House</span>
+        Sinopsis<span className={variant === 'light' ? 'text-amber-300' : 'text-amber-600'}>Coffee</span>
       </span>
     </div>
   )
