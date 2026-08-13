@@ -26,7 +26,7 @@ export const menus: Menu[] = [
     name: 'Caramel Latte',
     price: 42000,
     description:
-      'Silky smooth espresso blended with steamed milk and our house-made caramel syrup, topped with a drizzle of caramel sauce.',
+      'Silky smooth espresso blended .',
     image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&q=80',
     category: 'Coffee',
     isActive: true,
