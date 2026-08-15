@@ -1,8 +1,12 @@
 {
-    "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/index.html"
-        }
-    ]
+  "rewrites": [
+    {
+      "source": "/api-moka/:path*",
+      "destination": "https://api.mokapos.com/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
