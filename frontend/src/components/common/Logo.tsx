@@ -1,4 +1,3 @@
-import { Coffee } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface LogoProps {
@@ -26,7 +25,7 @@ export function Logo({ variant = 'dark', size = 'md', className }: LogoProps) {
             : 'bg-amber-900 text-amber-50'
         )}
       >
-        <Coffee size={icon} />
+        <img src="/images/icon.png" alt="Logo" width={icon} height={icon} />
       </div>
       <span
         className={cn(
@@ -35,7 +34,7 @@ export function Logo({ variant = 'dark', size = 'md', className }: LogoProps) {
           variant === 'light' ? 'text-white' : 'text-stone-900'
         )}
       >
-        Sinopsis<span className={variant === 'light' ? 'text-amber-300' : 'text-amber-600'}>Coffee</span>
+        Sinopsis <span className={variant === 'light' ? 'text-amber-300' : 'text-amber-600'}>Coffee</span>
       </span>
     </div>
   )

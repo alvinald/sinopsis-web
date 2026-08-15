@@ -1,11 +1,33 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Star, Clock, MapPin } from 'lucide-react'
 import { MenuCard } from '@/components/common/MenuCard'
-import { menus } from '@/data/menu'
+import { useMokaItems } from '@/hooks/public/useMokaItems'
 
-const featuredMenus = menus.filter((m) => m.isActive).slice(0, 3)
+  
 
 export function Home() {
+  // Ambil data permission dari hook
+  const { data } = useMokaItems();
+
+  const items = data?.data.items ?? []
+
+  const filtered = items.filter((m) => {
+
+
+    const coffe1 = m.name.toUpperCase().includes('AMERICANO')
+    const coffe2 = m.name.toUpperCase().includes('SINOPSIS COFFEE')
+    const coffe3 = m.name.toUpperCase().includes('MANUAL BREWING INTERNATIONAL')
+
+    return (
+      coffe1 ||
+      coffe2 ||
+      coffe3 
+    )
+  })
+
+  console.log(items)
+  console.log(filtered)
+
   return (
     <div>
       {/* Hero Section */}
@@ -83,7 +105,7 @@ export function Home() {
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-amber-100 sm:justify-between">
             <div className="flex items-center gap-2">
               <MapPin size={15} />
-              <span>Jl. Kopi Nusantara No. 12, Jakarta Selatan</span>
+              <span>Jl. Mawar Luar No. 12, Jakarta Utara</span>
             </div>
             <div className="flex items-center gap-2">
               <Clock size={15} />
@@ -175,8 +197,8 @@ export function Home() {
           </div>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredMenus.map((menu) => (
-              <MenuCard key={menu.id} menu={menu} />
+            {filtered.map((item) => (
+              <MenuCard key={item.id} menu={item} />
             ))}
           </div>
         </div>

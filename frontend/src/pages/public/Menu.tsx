@@ -1,21 +1,61 @@
 import { useState } from 'react'
 import { Search } from 'lucide-react'
 import { MenuCard } from '@/components/common/MenuCard'
-import { menus, categories } from '@/data/menu'
+// import { menus, categories } from '@/data/menu'
+import { useMokaItems } from '@/hooks/public/useMokaItems'
+// import { data } from 'react-router-dom'
 
 export function MenuPage() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [searchQuery, setSearchQuery] = useState('')
 
-  const filtered = menus.filter((m) => {
-    const matchCategory = activeCategory === 'All' || m.category === activeCategory
+  // Ambil data permission dari hook
+  const { data } = useMokaItems();
+
+  const items = data?.data.items ?? []
+
+  const filtered = items.filter((m) => {
+    const matchCategory =
+      activeCategory === 'All' ||
+      m.category.name === activeCategory
+
     const matchSearch =
       m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       m.description.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchCategory && matchSearch && m.isActive
+
+    const notNew = !m.name.toLowerCase().includes('new')
+    const notAdditional = !m.category.name.toLowerCase().includes('additional')
+    const notUncategorized = !m.category.name.toLowerCase().includes('uncategorized')
+
+    return (
+      matchCategory &&
+      matchSearch &&
+      notNew &&
+      notAdditional &&
+      notUncategorized &&
+      !m.is_deleted
+    )
   })
 
+  const categories = [
+  'All',
+  ...Array.from(
+    new Set(
+      items
+        .filter(
+          (item) =>
+            !item.is_deleted &&
+            !item.category.name.toLowerCase().includes('new') && 
+            !item.category.name.toLowerCase().includes('additional') && 
+            !item.category.name.toLowerCase().includes('uncategorized')
+        )
+        .map((item) => item.category.name)
+    )
+  ),
+]
+
   return (
+    
     <div>
       {/* Page Hero */}
       <section className="bg-stone-900 py-16 text-center" id="menu-hero">

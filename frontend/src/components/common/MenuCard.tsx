@@ -1,8 +1,9 @@
-import type { Menu } from '@/data/menu'
+// import type { Menu } from '@/data/menu'
 import { cn } from '@/lib/utils'
+import { Item } from '@/types/MokaResponse'
 
 interface MenuCardProps {
-  menu: Menu
+  menu: Item
   className?: string
 }
 
@@ -25,7 +26,7 @@ export function MenuCard({ menu, className }: MenuCardProps) {
   {/* Image */}
   <div className="relative aspect-[4/3] overflow-hidden bg-stone-100">
     <img
-      src={menu.image}
+      src={menu.image.url ? menu.image.url : '/public/images/logo.jpg'}
       alt={menu.name}
       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
       loading="lazy"
@@ -33,7 +34,7 @@ export function MenuCard({ menu, className }: MenuCardProps) {
 
     {/* Category tag */}
     <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-stone-700 shadow-sm backdrop-blur-sm">
-      {menu.category}
+      {menu.category.name}
     </span>
   </div>
 
@@ -50,7 +51,11 @@ export function MenuCard({ menu, className }: MenuCardProps) {
     {/* Price */}
     <div className="mt-auto flex items-center justify-between pt-4">
       <span className="text-lg font-bold text-amber-700">
-        {formatPrice(menu.price)}
+        {formatPrice(
+          menu.item_variants.length > 0
+            ? Math.max(...menu.item_variants.map((variant) => variant.price))
+            : 0
+        )}      
       </span>
     </div>
   </div>
