@@ -25,9 +25,6 @@ export function Home() {
     )
   })
 
-  console.log(items)
-  console.log(filtered)
-
   return (
     <div>
       {/* Hero Section */}

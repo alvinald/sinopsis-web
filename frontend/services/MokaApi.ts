@@ -3,7 +3,6 @@ import axios, { AxiosError, type AxiosResponse } from 'axios';
 
 // import Cookies untuk mengelola cookies
 // import Cookies from 'js-cookie';
-console.log('MOKA URL:', import.meta.env.VITE_MOKA_BASE_URL)
 // Buat instance Axios
 const MokaApi = axios.create({
     baseURL: import.meta.env.VITE_MOKA_BASE_URL,
